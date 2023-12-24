@@ -19,11 +19,7 @@ public class Predicates {
                 cont++;
             }
 
-            if (cont < 3) {
-                result = true;
-            } else {
-                result = false;
-            }
+            result = cont < 3;
         }
         return result;
     }
@@ -54,7 +50,7 @@ public class Predicates {
 
         List<Integer> esEntero = new ArrayList<>();
         for(Integer n: numbers){
-            if(numerosEnteros.test(n)== true){
+            if(numerosEnteros.test(n)){
                 esEntero.add(n);
             }
         }
