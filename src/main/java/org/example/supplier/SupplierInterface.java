@@ -17,7 +17,6 @@ public class SupplierInterface {
     }
 
     public static void main(String[] args){
-
         applyLocalDate();
     }
 
