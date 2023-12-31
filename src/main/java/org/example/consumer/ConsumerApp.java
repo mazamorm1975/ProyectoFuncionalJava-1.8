@@ -58,21 +58,6 @@ public class ConsumerApp {
         return listaProductos;
     }
 
-    private void GeneraPwd() {
-
-        String cadena = "ABCDEFGHIJKMNOPQRSTUVWXYZabcdefghijkmnopqrstwxyz1234567890#/):-%&&&?=?¡";
-        StringBuilder sp = new StringBuilder();
-        Supplier<String> cifrado = () -> {
-        for(int i=0; i<15; i++) {
-            int longitudCadena = new Random().nextInt(cadena.length());
-            sp.append(cadena.charAt(longitudCadena));
-         }
-            return sp.toString();
-        };
-
-        System.out.println("\n");
-        System.out.println(cifrado.get());
-    }
 
 
     public static void main(String[] args) {
@@ -80,6 +65,6 @@ public class ConsumerApp {
         ConsumerApp c1 = new ConsumerApp();
         c1.consumerInterface();
         c1.evaluarProducto();
-        c1.GeneraPwd();
+
      }
 }
