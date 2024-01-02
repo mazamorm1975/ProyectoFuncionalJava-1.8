@@ -1,10 +1,71 @@
 package org.example.streams;
 
+import java.awt.*;
 import java.time.LocalDate;
+import java.time.Period;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class AppStream {
 
-    public static void main(){
+    private void m1getDevelopers(List<Client> list, String textoABuscar) {
+        Predicate<Client> filtroClientesPorPuesto = x -> x.getJob().contains(textoABuscar);
+
+        List<Client> listado = list.stream()
+                .filter(filtroClientesPorPuesto)
+                .collect(Collectors.toList());
+
+        System.out.println(listado);
+
+    }
+
+    private void m2getDevelopers(List<Client> clienList){
+
+        //Listado Ordenado en orden de A - Z, con referencia al puesto del empleado
+        //guardado en una lista de tipo "Client"
+        List<Client> listadoClientes = clienList.stream()
+                .sorted(Comparator.comparing(Client::getJob))
+                .toList().reversed();
+        listadoClientes.forEach(System.out::println);
+
+        System.out.println("\n");
+        //Listado ordenado en orden de A - Z, con referencia al salario del empleado
+        //SIN utilizar metodos referenciados
+        clienList.stream()
+                .sorted(Comparator.comparing(x -> x.getSalary()))
+                .toList()
+                .reversed()
+                .forEach(x -> System.out.println(x));
+    }
+
+    private void m3CalculateOlderAge(List<Client> ageList){
+        System.out.println("\n");
+        Predicate<Client> calculateAge = x -> Period.between(x.getTime(), LocalDate.now()).getYears() >= 18;
+        ageList.stream()
+                .filter(calculateAge)
+                .forEach(x -> System.out.println(x));
+   }
+
+   private void m4GetTheOldestEmployee(List<Client> listOlder){
+       System.out.println("\n");
+        listOlder.stream()
+                .sorted(Comparator.comparing(Client::getTime))
+                .limit(1)
+                .forEach(System.out::println);
+   }
+
+   private void m6GetTheMaximumSalary(List<Client> listMaxSalary){
+        double max = listMaxSalary.stream()
+                .mapToDouble(Client::getSalary)
+                .max()
+                .orElse(0);
+       System.out.println("El maximo es : "+ max);
+    }
+
+    public static void main(String[] args){
 
         Client e1 = new Client(1, "Client1", "Trainee Developer", LocalDate.of(1991, 1, 1), 1000.00, "Peru");
         Client e2 = new Client(2, "Client2", "QA", LocalDate.of(1993, 2, 1), 2000.00, "Peru");
@@ -21,6 +82,15 @@ public class AppStream {
         Client e13 = new Client(13, "Client13", "Manager II", LocalDate.of(1980, 9, 2), 2000.00, "Peru");
         Client e14 = new Client(14, "Client23", "Manager III", LocalDate.of(1980, 9, 2), 2000.00, "Peru");
 
-
+        List<Client> clientList = Arrays.asList(e1,e2,e3,e4,e5,e6,e7,e8,e9,e10,e11,e12,e13,e14);
+        AppStream app =new AppStream();
+        app.m1getDevelopers(clientList, "QA");
+        app.m2getDevelopers(clientList);
+        app.m3CalculateOlderAge(clientList);
+        app.m4GetTheOldestEmployee(clientList);
+        app.m6GetTheMaximumSalary(clientList);
     }
+
+
+
 }
