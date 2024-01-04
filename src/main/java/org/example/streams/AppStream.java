@@ -8,6 +8,7 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.DoubleSummaryStatistics;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -30,8 +31,9 @@ public class AppStream {
         Client e12 = new Client(12, "Client12", "Manager", LocalDate.of(1980, 9, 2), 2000.00, "Mexico");
         Client e13 = new Client(13, "Client13", "Manager II", LocalDate.of(1980, 9, 2), 2000.00, "Peru");
         Client e14 = new Client(14, "Client23", "Manager III", LocalDate.of(1980, 9, 2), 2000.00, "Peru");
+        Client e15 = new Client(14, "Client23", "Manager III", LocalDate.of(1980, 9, 2), 2000.00, "Peru");
 
-        List<Client> clientList = Arrays.asList(e1, e2, e3, e4, e5, e6, e7, e8, e9, e10, e11, e12, e13, e14);
+        List<Client> clientList = Arrays.asList(e1, e2, e3, e4, e5, e6, e7, e8, e9, e10, e11, e12, e13, e14,e15);
         AppStream app = new AppStream();
         app.m1getDevelopers(clientList, "QA");
         app.m2getDevelopers(clientList);
@@ -39,6 +41,10 @@ public class AppStream {
         app.m4GetTheOldestEmployee(clientList);
         app.m6GetTheMaximumSalary(clientList);
         app.m7GetAverage(clientList);
+        app.m8GetSummaryStatistics(clientList);
+        app.m9GetRecordsUsingDistintc(clientList);
+        app.m10DiffBetweenCountAndSize(clientList);
+        app.m11Skip(clientList);
     }
 
     private void m1getDevelopers(List<Client> list, String textoABuscar) {
@@ -120,5 +126,49 @@ public class AppStream {
 
     }
 
+    private void m8GetSummaryStatistics(List<Client> clientList){
+        System.out.println("\n");
+
+       DoubleSummaryStatistics estadistica =  clientList.stream()
+                .mapToDouble(x -> x.getSalary())
+                .summaryStatistics();
+        System.out.println(estadistica);
+        System.out.println("Total Empleados: "+estadistica.getCount());
+        System.out.println("Promedio: "+estadistica.getAverage());
+        System.out.println("Salario Maximo:  "+estadistica.getMax());
+        System.out.println("Salario Minimo: "+estadistica.getMin());
+        System.out.println("Total Sumatoria: "+estadistica.getSum());
+    }
+
+    private void m9GetRecordsUsingDistintc(List<Client> clientList){
+        clientList.stream()
+                .distinct()
+                .forEach(System.out::println);
+    }
+
+    private void m10DiffBetweenCountAndSize(List<Client> clientList){
+        /*el metodo count en el api stream se utiliza mas cuando se tiene que contar elementos
+          productos de una logica
+        */
+        Predicate<Client> contarIdEmpleados = x -> x.getSalary() >= 500;
+        long usoCount = clientList.stream()
+                .filter(contarIdEmpleados)
+                .count();
+        /*
+         Si solo lo que se desea es conocer el total de elementos de una lista, basta con utilizar el size()
+         */
+        long usoSize = clientList.size();
+
+        System.out.println(usoCount);
+        System.out.println(usoSize);
+      }
+
+      private void m11Skip(List<Client>clientList){
+        clientList.stream()
+                .skip(7)
+                .distinct()
+                .limit(4)
+                .forEach(System.out::println);
+      }
 
 }
