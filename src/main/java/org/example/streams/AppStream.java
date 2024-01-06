@@ -44,6 +44,7 @@ public class AppStream {
         app.m10DiffBetweenCountAndSize(clientList);
         app.m11Skip(clientList);
         app.m12getAnyYounger(clientList);
+        app.m13map(clientList);
     }
 
     private void m1getDevelopers(List<Client> list, String textoABuscar) {
@@ -177,6 +178,16 @@ public class AppStream {
                 .anyMatch(filtradoJovenes);
 
         System.out.println("hay Alguna Empleado Joven ? "+hayAlgunJoven);
+    }
+
+    private void m13map(List<Client> clientList) {
+
+        clientList.stream().map(e -> {
+            e.setSalary(e.getSalary() * 1.10);
+            return e.getSalary();
+            //Iterando con una interfaz Consumer<Client>
+        }).forEach(System.out::println);
+
     }
 
 
