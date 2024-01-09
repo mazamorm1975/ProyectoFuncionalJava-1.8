@@ -47,6 +47,7 @@ public class AppStream {
         app.m12getAnyYounger(clientList);
         app.m13map(clientList);
         app.m14FlatMap(clientList);
+        app.m15GroupBy(clientList);
     }
 
     private void m1getDevelopers(List<Client> list, String textoABuscar) {
@@ -200,6 +201,12 @@ public class AppStream {
                 }).forEach(x -> {
                    System.out.print(x+"\n");
                });
+    }
+
+    private void m15GroupBy(List<Client> clientList){
+       Map<String, List<Client>> filtroPorPais =  clientList.stream()
+                   .collect(Collectors.groupingBy(x -> x.getCountry()));
+       System.out.print(filtroPorPais+"\n");
     }
 
 
