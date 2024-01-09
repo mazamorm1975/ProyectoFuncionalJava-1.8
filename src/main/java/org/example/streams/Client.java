@@ -5,14 +5,19 @@ import lombok.*;
 import java.time.LocalDate;
 
 @Data
-//@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+//la anotación @ToString(onlyExplicitlyIncluded = true) solo permite visualizar los campos que queremos que
+//Se visualicen al momento de la impresión
+@ToString(onlyExplicitlyIncluded = true)
 @AllArgsConstructor
 @NoArgsConstructor
 public class Client {
 
     //@EqualsAndHashCode.Include
     private int id;
+    @ToString.Include
     private String clientName;
+    @ToString.Include
     private String job;
     private LocalDate time;
     private double salary;

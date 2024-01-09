@@ -9,7 +9,7 @@ import java.time.Period;
 import java.util.*;
 import java.util.List;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
+import static java.util.stream.Collectors.*;
 import java.util.stream.Stream;
 
 public class AppStream {
@@ -34,7 +34,7 @@ public class AppStream {
 
         List<Client> clientList = Arrays.asList(e1, e2, e3, e4, e5, e6, e7, e8, e9, e10, e11, e12, e13, e14, e15);
         AppStream app = new AppStream();
-        app.m1getDevelopers(clientList, "QA");
+     /*   app.m1getDevelopers(clientList, "QA");
         app.m2getDevelopers(clientList);
         app.m3CalculateOlderAge(clientList);
         app.m4GetTheOldestEmployee(clientList);
@@ -47,6 +47,7 @@ public class AppStream {
         app.m12getAnyYounger(clientList);
         app.m13map(clientList);
         app.m14FlatMap(clientList);
+        */
         app.m15GroupBy(clientList);
     }
 
@@ -55,7 +56,7 @@ public class AppStream {
 
         List<Client> listado = list.stream()
                 .filter(filtroClientesPorPuesto)
-                .collect(Collectors.toList());
+                .collect(toList());
 
         System.out.println(listado);
 
@@ -180,7 +181,7 @@ public class AppStream {
         boolean hayAlgunJoven = clientList.stream()
                 .anyMatch(filtradoJovenes);
 
-        System.out.println("hay Alguna Empleado Joven ? "+hayAlgunJoven);
+        System.out.println("hay Alguna Empleado Joven ? " + hayAlgunJoven);
     }
 
     private void m13map(List<Client> clientList) {
@@ -193,26 +194,23 @@ public class AppStream {
 
     }
 
-    private void m14FlatMap(List<Client> clientList){
-       clientList.stream()
+    private void m14FlatMap(List<Client> clientList) {
+        clientList.stream()
                 .filter(x -> x.getSalary() > 500)
                 .flatMap(y -> {
-                   return Stream.of(y.getSalary(), y.getClientName(), y.getCountry());
+                    return Stream.of(y.getSalary(), y.getClientName(), y.getCountry());
                 }).forEach(x -> {
-                   System.out.print(x+"\n");
-               });
+                    System.out.print(x + "\n");
+                });
     }
 
-    private void m15GroupBy(List<Client> clientList){
-       Map<String, List<Client>> filtroPorPais =  clientList.stream()
-                   .collect(Collectors.groupingBy(x -> x.getCountry()));
-       System.out.print(filtroPorPais+"\n");
+    private void m15GroupBy(List<Client> clientList) {
+        Map<String, List<Client>>countryList = clientList.stream()
+                .collect(groupingBy(e -> e.getCountry()));
+        System.out.println(countryList);
+
+       Map<String, Map<String, List<Client>>> listadoClientes = clientList.stream()
+                .collect(groupingBy(e -> e.getCountry(), groupingBy(e-> e.getJob())));
+        System.out.println(listadoClientes);
     }
-
-
-
-
-
-
-
 }
