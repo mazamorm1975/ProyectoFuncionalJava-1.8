@@ -10,6 +10,7 @@ import java.util.*;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class AppStream {
 
@@ -45,6 +46,7 @@ public class AppStream {
         app.m11Skip(clientList);
         app.m12getAnyYounger(clientList);
         app.m13map(clientList);
+        app.m14FlatMap(clientList);
     }
 
     private void m1getDevelopers(List<Client> list, String textoABuscar) {
@@ -189,6 +191,21 @@ public class AppStream {
         }).forEach(System.out::println);
 
     }
+
+    private void m14FlatMap(List<Client> clientList){
+       clientList.stream()
+                .filter(x -> x.getSalary() > 500)
+                .flatMap(y -> {
+                   return Stream.of(y.getSalary(), y.getClientName(), y.getCountry());
+                }).forEach(x -> {
+                   System.out.print(x+"\n");
+               });
+    }
+
+
+
+
+
 
 
 }
