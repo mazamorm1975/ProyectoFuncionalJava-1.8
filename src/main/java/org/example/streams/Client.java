@@ -14,8 +14,9 @@ import java.time.LocalDate;
 public class Client {
 
     //@EqualsAndHashCode.Include
-    private int id;
     @ToString.Include
+    private int id;
+    //@EqualsAndHashCode.Include
     private String clientName;
     @ToString.Include
     private String job;

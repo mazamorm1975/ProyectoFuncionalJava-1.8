@@ -1,15 +1,17 @@
 package org.example.streams;
 
-import java.awt.*;
-import java.math.BigDecimal;
-import java.math.RoundingMode;
+
 import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.*;
 import java.util.List;
 import java.util.function.Predicate;
+
 import static java.util.stream.Collectors.*;
+import static java.util.Comparator.*;
+
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class AppStream {
@@ -32,6 +34,7 @@ public class AppStream {
         Client e14 = new Client(14, "Client23", "Manager III", LocalDate.of(1980, 9, 2), 2000.00, "Peru");
         Client e15 = new Client(14, "Client23", "Manager III", LocalDate.of(1980, 9, 2), 2000.00, "Peru");
 
+
         List<Client> clientList = Arrays.asList(e1, e2, e3, e4, e5, e6, e7, e8, e9, e10, e11, e12, e13, e14, e15);
         AppStream app = new AppStream();
      /*   app.m1getDevelopers(clientList, "QA");
@@ -47,8 +50,14 @@ public class AppStream {
         app.m12getAnyYounger(clientList);
         app.m13map(clientList);
         app.m14FlatMap(clientList);
-        */
         app.m15GroupBy(clientList);
+        app.m16ToMapToSet(clientList);
+        app.m17Comparator(clientList);
+        app.m18SalarySumByCountry(clientList);
+        */
+        app.m19ComplexExercises(clientList);
+
+
     }
 
     private void m1getDevelopers(List<Client> list, String textoABuscar) {
@@ -67,7 +76,7 @@ public class AppStream {
         //Listado Ordenado en orden de A - Z, con referencia al puesto del empleado
         //guardado en una lista de tipo "Client"
         List<Client> listadoClientes = clienList.stream()
-                .sorted(Comparator.comparing(Client::getJob))
+                .sorted(comparing(Client::getJob))
                 .toList().reversed();
         listadoClientes.forEach(System.out::println);
 
@@ -75,7 +84,7 @@ public class AppStream {
         //Listado ordenado en orden de A - Z, con referencia al salario del empleado
         //SIN utilizar metodos referenciados
         clienList.stream()
-                .sorted(Comparator.comparing(x -> x.getSalary()))
+                .sorted(comparing(x -> x.getSalary()))
                 .toList()
                 .reversed()
                 .forEach(x -> System.out.println(x));
@@ -92,7 +101,7 @@ public class AppStream {
     private void m4GetTheOldestEmployee(List<Client> listOlder) {
         System.out.println("\n");
         listOlder.stream()
-                .sorted(Comparator.comparing(Client::getTime))
+                .sorted(comparing(Client::getTime))
                 .limit(1)
                 .forEach(System.out::println);
     }
@@ -111,7 +120,7 @@ public class AppStream {
         System.out.println("El mínimo de salario es: " + min);
 
         Client cli = listMaxSalary.stream()
-                .max(Comparator.comparing(x -> x.getSalary()))
+                .max(comparing(x -> x.getSalary()))
                 .orElse(new Client());
 
         System.out.println("El empleado que mas gana es y que menos hace es  : " + cli);
@@ -205,12 +214,82 @@ public class AppStream {
     }
 
     private void m15GroupBy(List<Client> clientList) {
-        Map<String, List<Client>>countryList = clientList.stream()
-                .collect(groupingBy(e -> e.getCountry()));
-        System.out.println(countryList);
 
-       Map<String, Map<String, List<Client>>> listadoClientes = clientList.stream()
-                .collect(groupingBy(e -> e.getCountry(), groupingBy(e-> e.getJob())));
+        Map<Integer, List<Client>> listadoClientes1 = clientList.stream()
+                .collect(groupingBy(Client::getId));
+        System.out.println(listadoClientes1);
+
+
+        Map<String, Map<String, List<Client>>> listadoClientes = clientList.stream()
+                .collect(groupingBy(x -> x.getCountry(), groupingBy(y -> y.getJob())));
         System.out.println(listadoClientes);
     }
+
+    private void m16ToMapToSet(List<Client> clientList) {
+        Map<String, List<Client>> listado = clientList.stream().collect(groupingBy(Client::getCountry));
+
+        Set<Client> listadoSet = new HashSet<>(clientList);
+        System.out.println(listado.entrySet());
+        System.out.println(listado.values());
+        listado.entrySet().forEach(System.out::println);
+
+    }
+
+    private void m17Comparator(List<Client> clientList) {
+        clientList.stream()
+                .sorted(comparing(Client::getTime).reversed())
+                .forEach(System.out::println);
+
+        List<Integer> listado = Stream.of(1, 2, 3, 4, 5, 7, 8, 9, 12)
+                .sorted(Comparator.reverseOrder())
+                .collect(toList());
+
+
+        System.out.println("Tamaño del listado es de " + listado.size() + " elementos");
+        System.out.println("Elementos contenidos en la lista ");
+        for (Integer i : listado) {
+            System.out.println(i + " ");
+        }
+
+    }
+
+    private void m18SalarySumByCountry(List<Client> clientList) {
+        Map<String, Double> salaryListByCountry = clientList.stream()
+                .collect(groupingBy(x -> x.getCountry(), summingDouble(x -> x.getSalary())));
+
+        salaryListByCountry.forEach((x, y) -> System.out.println("Pais " + x + "|" + " Salario Total Del Pais " + y));
+    }
+
+    /*
+    - Filtrar los empleados que ganen mas de $2000.00., y que pertenecen a un pais de america latina
+      (Peru, Paraguay, Colombia, Argentina, Ecuador, Chile, Mexico)
+    - Ordenar los empleados filtrados por pais en orden alfabetico ascendente y luego por salario en orden descendente
+    - Obtener una lista de los empleados Mejor pagados de cada pais y agregarlos a una lista separada
+     */
+    private void m19ComplexExercises(List<Client> clientList) {
+
+        List<String> countryList = Arrays.asList("Peru", "Paraguay", "Rep. Dominicana", "Colombia", "Argentina", "Ecuador", "Chile", "Mexico");
+
+        Map<String, List<Client>> listado = clientList.stream()
+                .filter(x -> countryList.contains(x.getCountry()))
+                .filter(x -> x.getSalary() > 2000.00)
+                .sorted(comparing(Client::getCountry).thenComparing(Client::getSalary).reversed())
+                .collect(groupingBy(Client::getCountry));
+
+        System.out.println("==========================================");
+
+        List<Client> bestEmployeesPaid = new ArrayList<>();
+        for (List<Client> listForEmployees : listado.values()) {
+            bestEmployeesPaid.add(
+                    listForEmployees.stream()
+                            .max(comparing(x -> x.getSalary()))
+                            .orElse(new Client()));
+        }
+
+        bestEmployeesPaid.forEach(System.out::println);
+
+
+    }
+
+
 }
