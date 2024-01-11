@@ -32,7 +32,7 @@ public class AppStream {
         Client e12 = new Client(12, "Client12", "Manager", LocalDate.of(1980, 9, 2), 2000.00, "Mexico");
         Client e13 = new Client(13, "Client13", "Manager II", LocalDate.of(1980, 9, 2), 2000.00, "Peru");
         Client e14 = new Client(14, "Client23", "Manager III", LocalDate.of(1980, 9, 2), 2000.00, "Peru");
-        Client e15 = new Client(14, "Client23", "Manager III", LocalDate.of(1980, 9, 2), 2000.00, "Peru");
+        Client e15 = new Client(15, "Client23", "Manager III", LocalDate.of(1980, 9, 2), 2001.00, "Peru");
 
 
         List<Client> clientList = Arrays.asList(e1, e2, e3, e4, e5, e6, e7, e8, e9, e10, e11, e12, e13, e14, e15);
@@ -54,8 +54,9 @@ public class AppStream {
         app.m16ToMapToSet(clientList);
         app.m17Comparator(clientList);
         app.m18SalarySumByCountry(clientList);
-        */
         app.m19ComplexExercises(clientList);
+        */
+        app.m20ReduceMethod();
 
 
     }
@@ -260,36 +261,38 @@ public class AppStream {
         salaryListByCountry.forEach((x, y) -> System.out.println("Pais " + x + "|" + " Salario Total Del Pais " + y));
     }
 
-    /*
+
+    private void m19ComplexExercises(List<Client> clientList) {
+        List<String> countryList = Arrays.asList("Peru", "Paraguay", "Rep. Dominicana", "Colombia", "Argentina", "Ecuador", "Chile", "Mexico");
+
+        Map<String, List<Client>> listaFiltro = clientList.stream()
+                .filter(x -> countryList.contains(x.getCountry()))
+                .filter(x -> x.getSalary() > 2000.00)
+                .sorted(comparing(Client::getCountry).thenComparing(Client::getSalary).reversed())
+                .collect(groupingBy(Client::getCountry));
+        /*
     - Filtrar los empleados que ganen mas de $2000.00., y que pertenecen a un pais de america latina
       (Peru, Paraguay, Colombia, Argentina, Ecuador, Chile, Mexico)
     - Ordenar los empleados filtrados por pais en orden alfabetico ascendente y luego por salario en orden descendente
     - Obtener una lista de los empleados Mejor pagados de cada pais y agregarlos a una lista separada
      */
-    private void m19ComplexExercises(List<Client> clientList) {
+        List<Client> filtradoFinal = new ArrayList<>();
 
-        List<String> countryList = Arrays.asList("Peru", "Paraguay", "Rep. Dominicana", "Colombia", "Argentina", "Ecuador", "Chile", "Mexico");
-
-        Map<String, List<Client>> listado = clientList.stream()
-                .filter(x -> countryList.contains(x.getCountry()))
-                .filter(x -> x.getSalary() > 2000.00)
-                .sorted(comparing(Client::getCountry).thenComparing(Client::getSalary).reversed())
-                .collect(groupingBy(Client::getCountry));
-
-        System.out.println("==========================================");
-
-        List<Client> bestEmployeesPaid = new ArrayList<>();
-        for (List<Client> listForEmployees : listado.values()) {
-            bestEmployeesPaid.add(
-                    listForEmployees.stream()
-                            .max(comparing(x -> x.getSalary()))
-                            .orElse(new Client()));
+        for (List<Client> listaAlmacenado : listaFiltro.values()) {
+            filtradoFinal.add(
+                    listaAlmacenado.stream()
+                        .max(comparing(Client::getSalary))
+                        .orElse(new Client())
+            );
         }
-
-        bestEmployeesPaid.forEach(System.out::println);
-
-
+        filtradoFinal.stream().forEach(x -> System.out.println(x));
     }
 
+    private void m20ReduceMethod(){
+        List<Integer>  resultadoSumatoria = Arrays.asList(1,2,3,4,5,6,7,8,9,10);
+        Integer lista = resultadoSumatoria.stream()
+                .reduce(0, (sumatoria, elemento) -> sumatoria + elemento);
+        System.out.println("La sumatoria del total de elementos de la lista es de " + lista+ " elementos");
+    }
 
 }
