@@ -55,8 +55,10 @@ public class AppStream {
         app.m17Comparator(clientList);
         app.m18SalarySumByCountry(clientList);
         app.m19ComplexExercises(clientList);
-        */
         app.m20ReduceMethod();
+        */
+
+        app.m21Joinin();
 
 
     }
@@ -293,6 +295,15 @@ public class AppStream {
         Integer lista = resultadoSumatoria.stream()
                 .reduce(0, (sumatoria, elemento) -> sumatoria + elemento);
         System.out.println("La sumatoria del total de elementos de la lista es de " + lista+ " elementos");
+    }
+    
+    private void m21Joinin(){
+        List<String> firstList = Arrays.asList("Mario","Pedro","Maria","Angelica","Sonia","Armando","Roberto","Carmen","Rosario","Hortencia","Eliseo","Guadalupe");
+        String resultList = firstList.stream().collect(Collectors.joining(","));
+
+        System.out.print(resultList);
+
+
     }
 
 }
