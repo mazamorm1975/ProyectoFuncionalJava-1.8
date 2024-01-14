@@ -302,8 +302,6 @@ public class AppStream {
         String resultList = firstList.stream().collect(Collectors.joining(","));
 
         System.out.print(resultList);
-
-
     }
 
 }
