@@ -71,8 +71,14 @@ public class Time {
          LocalDate fecha1 = LocalDate.parse("2024-01-15");
          LocalDate fecha2 = LocalDate.parse("15/01/2024", DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 
-        System.out.println(fecha1);
-        System.out.println(fecha2);
+         System.out.println(fecha1);
+         System.out.println(fecha2);
+
+         //Suponiendo que se requiera formatear una fecha con hora y segundos, se tendria que utilizar lo siguiente
+         LocalDateTime fechaCompleta = LocalDateTime.now();
+         LocalDateTime fechaCompletaFormateada = LocalDateTime.parse("2016-02-29T09:15:42", DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss"));
+
+        System.out.println(fechaCompletaFormateada);
     }
 
     public static void main (String[] args){
