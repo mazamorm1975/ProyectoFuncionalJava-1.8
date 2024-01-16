@@ -1,10 +1,7 @@
-package org.example.functional;
+package org.java_8_feature_analisis.functional;
 
-import org.example.model.Product;
+import org.java_8_feature_analisis.model.Product;
 
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.function.*;
 import java.util.stream.Collectors;

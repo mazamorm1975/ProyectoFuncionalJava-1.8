@@ -1,4 +1,4 @@
-package org.example.streams;
+package org.java_8_feature_analisis.streams;
 
 
 import java.text.DecimalFormat;

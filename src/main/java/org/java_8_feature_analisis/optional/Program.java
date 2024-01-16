@@ -1,8 +1,7 @@
-package org.example.optional;
+package org.java_8_feature_analisis.optional;
 
-import org.example.functional.Client;
+import org.java_8_feature_analisis.functional.Client;
 
-import javax.swing.text.html.Option;
 import java.util.Optional;
 
 public class Program {

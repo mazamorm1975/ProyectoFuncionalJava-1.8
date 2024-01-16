@@ -1,4 +1,4 @@
-package org.example.functional;
+package org.java_9;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,12 +7,10 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Client {
+public class Product implements ProductService{
 
-    private Integer idCliente;
+    private int id;
     private String name;
-    private String city;
-    private String job;
-    private String country;
+    private boolean status;
 
 }
