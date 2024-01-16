@@ -28,6 +28,35 @@ public class CollectionApp {
 
     }
 
+    private void m2UbmodifiableList(List<Product> listProduct){
+
+        /*
+        * Se pasa una lista de tipo Producto con la premisa de NO ser modificable, y se guarda en otra lista
+        * llamada listaDeProductos
+        */
+        List<Product> listaDeProductos = Collections.unmodifiableList(listProduct);
+
+        //Se altera la lista ORIGINAL agregando un nuevo elemento.
+        listProduct.add(new Product(5,"PS7", false));
+
+        //Se imprime la lista que contiene la lista original la cual sufrio una alteración.
+        listaDeProductos.stream().forEach(System.out::println);
+
+        /*
+         * Se pasa una lista de tipo Producto con la premisa de NO ser modificable, y se guarda en otra lista
+         * llamada listaDeProductos
+         */
+        List<Product> listaNueva =  List.copyOf(listProduct);
+
+        //Se altera la lista ORIGINAL agregando un nuevo elemento.
+        listProduct.add(new Product(6,"PS8", false));
+
+        //Al momento de recorrer la lista nueva, solo arrojara los elementos originales
+        //, mas no el que se agrego, es decir el id=6
+        listaNueva.stream().forEach(x -> System.out.println(x));
+
+    }
+
     public static void main(String[] args) {
 
         List<Product> lista = new ArrayList<>();
@@ -37,7 +66,8 @@ public class CollectionApp {
         lista.add(new Product(4,"PS6", true));
 
         CollectionApp app = new CollectionApp();
-        app.m1CopyOf(lista);
+        //app.m1CopyOf(lista);
+        app.m2UbmodifiableList(lista);
 
     }
 
