@@ -1,4 +1,4 @@
-package org.example.model;
+package org.java_8_feature_analisis.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

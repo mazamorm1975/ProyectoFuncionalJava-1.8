@@ -1,6 +1,6 @@
-package org.example.predicate;
+package org.java_8_feature_analisis.predicate;
 
-import org.example.model.Persona;
+import org.java_8_feature_analisis.model.Persona;
 
 import java.util.ArrayList;
 import java.util.Arrays;

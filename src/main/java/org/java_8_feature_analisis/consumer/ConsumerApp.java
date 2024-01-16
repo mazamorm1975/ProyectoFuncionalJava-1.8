@@ -1,16 +1,9 @@
-package org.example.consumer;
+package org.java_8_feature_analisis.consumer;
 
-import org.example.model.Product;
-import org.example.supplier.SupplierInterface;
+import org.java_8_feature_analisis.model.Product;
 
-import java.text.SimpleDateFormat;
-import java.time.*;
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
 import java.util.*;
 import java.util.function.Consumer;
-import java.util.function.Supplier;
-import java.util.logging.SimpleFormatter;
 
 public class ConsumerApp {
     //Metodo que incrementa en uno cada uno de los elementos de la lista "list"

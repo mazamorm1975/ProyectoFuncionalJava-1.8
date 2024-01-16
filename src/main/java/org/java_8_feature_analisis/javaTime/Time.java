@@ -1,10 +1,8 @@
-package org.example.javaTime;
+package org.java_8_feature_analisis.javaTime;
 
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
-import java.util.Locale;
-import java.util.Set;
 
 
 public class Time {
@@ -40,6 +38,8 @@ public class Time {
 
         LocalTime tiempoZonaHorariaMexico = LocalTime.now(zonaHorariaMexico);
         LocalTime tiempoZonaHorariaIndia = LocalTime.now(zonaHorariaIndia);
+
+        System.out.println(tiempoZonaHorariaMexico);
 
         //Como conseguir la diferencia de Horarios entre dos Zonas Horarias por horas y minutos
         long diffEntreZonasHorarias = ChronoUnit.HOURS.between(tiempoZonaHorariaMexico, tiempoZonaHorariaIndia);
@@ -83,9 +83,10 @@ public class Time {
 
     public static void main (String[] args){
         Time time = new Time();
-        time.m1WorkingWithDates();
-        time.m2DiffTimeZones();
+        //time.m1WorkingWithDates();
+        //time.m2DiffTimeZones();
         time.m3Instant();
-        time.m4FormateadoresDeFechas();
+        //time.m4FormateadoresDeFechas();
+
     }
 }

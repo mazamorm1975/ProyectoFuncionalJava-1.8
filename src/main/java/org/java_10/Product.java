@@ -1,4 +1,4 @@
-package org.example.functional;
+package org.java_10;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,10 +7,10 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Person {
+public class Product {
 
-    private Integer id;
+    private int id;
     private String name;
-    private Integer age;
+    private boolean status;
 
 }
