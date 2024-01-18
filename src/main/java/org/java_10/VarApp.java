@@ -63,7 +63,6 @@ public class VarApp {
         listaFiltroProductos2.forEach(System.out::println);
     }
 
-
     public static void main(String[] args){
         VarApp app = new VarApp();
         app.m1Classic();
