@@ -20,5 +20,15 @@ public class RecordApp {
         System.out.println(prodRec.price());
         System.out.println(prodRec.status());
 
-          }
+        ProductRecord prodRec2 = new ProductRecord(2,"Teclado Asus", 5400.45, false);
+        System.out.println(ProductRecord.idProducto);
+
+        prodRec2.testFabric();
+        prodRec2.testFabric2();
+        prodRec2.testFabric3();
+
+
+
+
+    }
 }
