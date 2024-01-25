@@ -1,11 +1,10 @@
 package org.java_12_17;
 
 
-
 public class RecordApp {
 
     public static void main(String[] args) {
-
+/*
         Product prod = new Product(1,"handbag", 984.54, true);
         System.out.println(prod.getId());
         System.out.println(prod.getNombre());
@@ -26,8 +25,9 @@ public class RecordApp {
         prodRec2.testFabric();
         prodRec2.testFabric2();
         prodRec2.testFabric3();
-
-
+*/
+        Product prod = new Product();
+        System.out.println(prod.BuscarNombre());
 
 
     }
