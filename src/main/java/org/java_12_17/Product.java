@@ -1,6 +1,9 @@
 package org.java_12_17;
 
-public class Product {
+import lombok.NoArgsConstructor;
+import org.java_12_17.ClaseSellada;
+@NoArgsConstructor(force = true)
+public non-sealed class Product extends ClaseSellada{
 
     private final int id;
     private final String nombre;
@@ -32,4 +35,7 @@ public class Product {
     public boolean isStatus() {
         return status;
     }
+
+
+
 }
