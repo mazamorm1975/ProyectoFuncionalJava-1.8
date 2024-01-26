@@ -1,7 +1,7 @@
-package org.java_12_17;
+package org.java_12_17.sealedClasesAndRecord;
 
 import lombok.NoArgsConstructor;
-import org.java_12_17.ClaseSellada;
+
 @NoArgsConstructor(force = true)
 public non-sealed class Product extends ClaseSellada{
 

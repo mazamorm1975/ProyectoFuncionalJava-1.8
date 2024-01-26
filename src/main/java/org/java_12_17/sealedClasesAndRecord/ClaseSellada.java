@@ -1,4 +1,4 @@
-package org.java_12_17;
+package org.java_12_17.sealedClasesAndRecord;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
