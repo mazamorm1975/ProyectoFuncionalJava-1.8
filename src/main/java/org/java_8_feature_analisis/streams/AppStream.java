@@ -37,8 +37,8 @@ public class AppStream {
 
         List<Client> clientList = Arrays.asList(e1, e2, e3, e4, e5, e6, e7, e8, e9, e10, e11, e12, e13, e14, e15);
         AppStream app = new AppStream();
-     /*   app.m1getDevelopers(clientList, "QA");
         app.m2getDevelopers(clientList);
+      /*app.m1getDevelopers(clientList, "QA");
         app.m3CalculateOlderAge(clientList);
         app.m4GetTheOldestEmployee(clientList);
         app.m6GetTheMaximumSalary(clientList);
@@ -56,9 +56,9 @@ public class AppStream {
         app.m18SalarySumByCountry(clientList);
         app.m19ComplexExercises(clientList);
         app.m20ReduceMethod();
+       	app.m21Joinin();
         */
-
-        app.m21Joinin();
+     
 
 
     }
@@ -88,8 +88,7 @@ public class AppStream {
         //SIN utilizar metodos referenciados
         clienList.stream()
                 .sorted(comparing(x -> x.getSalary()))
-                .toList()
-                .reversed()
+                .toList().reversed()                
                 .forEach(x -> System.out.println(x));
     }
 

@@ -9,7 +9,7 @@ public class ConsumerApp {
     //Metodo que incrementa en uno cada uno de los elementos de la lista "list"
     public List<Integer> consumerInterface() {
 
-        List<Integer> list = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15);
+        List<Integer> list = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15,16,18);
         Consumer<Integer> incrementar = x -> {
             x++;
             System.out.print(x+", ");
@@ -57,7 +57,7 @@ public class ConsumerApp {
 
         ConsumerApp c1 = new ConsumerApp();
         c1.consumerInterface();
-        c1.evaluarProducto();
+       // c1.evaluarProducto();
 
      }
 }

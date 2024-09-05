@@ -7,8 +7,8 @@ import java.util.Optional;
 public class Program {
 
     private void m1Optional(){
-        Optional<Client> op = Optional.of(new Client(1,"Mario","CDMX","Programmer", "Mexico"));
-        //Optional<Client> op = Optional.empty();
+        //Optional<Client> op = Optional.of(new Client(1,"Mario","CDMX","Programmer", "Mexico"));
+        Optional<Client> op = Optional.empty();
 
         /*El Optional no quiere decir que NUNCA se obtenga la excepción de los null pointer exception
         * Solo mitiga la posibilidad de no conseguirlos */
@@ -18,12 +18,12 @@ public class Program {
 
         /*Con un optional de tipo Optional.ofNullable(null), se obtendra una instancia con valores nulos
         , pero NO se obtendra el nullpointer exception*/
-        //Optional<Client> op = Optional.ofNullable(null);
+        //Optional<Client> op = Optional.ofNullable( null);
 
 
-        //System.out.println(op.orElseGet(Client::new));
+        System.out.println(op.orElseGet(Client::new));
         //System.out.println(op.isPresent());
-        op.ifPresent(obj -> System.out.println(obj.getCity()));
+        //op.ifPresent(obj -> System.out.println(obj.getCountry()));
     }
 
     public static void main(String[] args){
